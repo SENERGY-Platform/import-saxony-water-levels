@@ -1,0 +1,6 @@
+git+https://github.com/SENERGY-Platform/import-lib.git@68b6fcaa8c79ac9e87e470fb0ebf4bd886e75f5b
+schedule
+requests
+zeep==4.0.0
+pyproj==3.0.0.post1
+rfc3339
