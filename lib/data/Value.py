@@ -36,11 +36,14 @@ class Value(object):
         self.predicted_for = predicted_for
 
     def dict(self) -> dict:
-        return {
+        d = {
             "tendency": self.tendency,
             "value": self.value,
             "unit": self.unit,
             "status": self.status,
-            "predicted_for": rfc3339(self.predicted_for),
             "meta": self.station.dict()
         }
+        if self.predicted_for is not None:
+            d["predicted_for"] = rfc3339(self.predicted_for)
+
+        return  d
