@@ -40,6 +40,8 @@ class WaterLevelImport:
                 self.__last_run = datetime.fromtimestamp(1293840000, timezone.utc)  # 2015-01-01
             else:
                 self.__last_run = datetime.fromtimestamp(1451606400, timezone.utc)  # 2016-01-01
+        else:
+            self.__last_run = self.__last_run.replace(tzinfo=timezone.utc)
 
         with open('credentials.json', 'r') as f:
             import json
