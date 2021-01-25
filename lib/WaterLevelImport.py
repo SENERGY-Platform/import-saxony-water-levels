@@ -21,7 +21,7 @@ from lib.meta.fetch import get_stations
 
 logger = get_logger(__name__)
 
-slice_size = timedelta(days=100)
+slice_size = timedelta(days=50)
 
 
 class WaterLevelImport:
