@@ -13,7 +13,7 @@
 #  limitations under the License.
 
 from datetime import datetime, timedelta
-from typing import List, Dict, Optional
+from typing import List, Optional
 
 from import_lib.import_lib import get_logger
 from requests.auth import HTTPBasicAuth
@@ -23,6 +23,8 @@ from zeep.transports import Transport
 
 from lib.data.Value import Value
 from lib.meta.Station import Station
+
+import time
 
 logger = get_logger(__name__)
 
@@ -59,7 +61,17 @@ class Service:
             unit = 'cm'
         elif phys_unit == 'P':
             unit = 'mm'
-        res = self.__client.service.liefereWerteZuSpuren2(spur_identifikatoren, dt_from, dt_to, False)
+        res = None
+        ok = False
+        timeout = 10
+        while not ok:
+            try:
+                res = self.__client.service.liefereWerteZuSpuren2(spur_identifikatoren, dt_from, dt_to, False)
+                ok = True
+            except Exception:
+                logger.error("Could not fetch data. Will retry in " + str(timeout) + "s")
+                time.sleep(timeout)
+                timeout *= 2
         if res is None or len(res) == 0:
             return []
         values = []
