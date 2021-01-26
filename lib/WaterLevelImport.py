@@ -59,16 +59,19 @@ class WaterLevelImport:
     def import_since(self, start: datetime):
         now = datetime.now(timezone.utc)
         next_end = start + slice_size
-        self.__import_slice(start, next_end)
+        count = 0
+        count += self.__import_slice(start, next_end)
         while now > next_end:
             start = next_end  # works in python by value
             next_end = start + slice_size
             self.__import_slice(start, next_end)
-        self.__last_run = now
+        if  count > 0:
+            self.__last_run = now
 
-    def __import_slice(self, start: datetime, end: datetime):
+    def __import_slice(self, start: datetime, end: datetime) -> int:
         values = self.__service.get_multiple_series_data(self.__stations, self.__type, self.__series, self.__phys_unit,
                                                          start, end)
         values.sort(key=lambda v: v.time)
         for value in values:
             self.__lib.put(value.time, value.dict())
+        return len(values)
