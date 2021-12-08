@@ -27,7 +27,7 @@ logger = get_logger(__name__)
 
 wsdl = 'https://www.umwelt.sachsen.de/umwelt/infosysteme/hwims/webservices/stammdaten-ws?wsdl'
 
-utm_zone = '33N'
+utm_zone = '33'
 utm_ellps = 'WGS84'
 
 
