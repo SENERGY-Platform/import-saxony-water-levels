@@ -20,7 +20,7 @@ from import_lib.import_lib import ImportLib, get_logger
 from lib.WaterLevelImport import WaterLevelImport
 
 if __name__ == '__main__':
-    lib = ImportLib()
+    lib = ImportLib("github.com/SENERGY-Platform/import-saxony-water-levels")
     logger = get_logger(__name__)
     waterLevelImport = WaterLevelImport(lib)
 
