@@ -1,6 +1,6 @@
 git+https://github.com/SENERGY-Platform/import-lib.git@0.3.0
 schedule
 requests
-zeep==4.3.2
+zeep==4.3.3
 pyproj==3.7.2
 rfc3339
